@@ -1,0 +1,41 @@
+button{
+  border: 2px solid yellowgreen;
+  color: black;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  min-width: 300px;
+  margin-top: 10px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.voltColor{
+  color: red;
+}
+
+.left-pane{
+   border-left: 0.2px solid #E7E7E7;
+ }
+.right-pane{
+  //border-right: 0.2px solid #E7E7E7;
+}
+
+.conf-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.conf-form > * {
+  width: 100%;
+}
+
+.rt{
+  color: black;
+}

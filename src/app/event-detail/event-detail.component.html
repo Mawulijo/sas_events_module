@@ -1,0 +1,28 @@
+<div class="text-center" mat-dialog-title><h1 class="lead"><strong>Event's Details</strong></h1></div>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <div class="text-justify">
+    <!--<div *ngFor="let eventDetails of data;">-->
+      <p class="lead"><strong>Event Key:</strong>  {{ data.description.details.event_key }}</p>
+      <p class="lead"><strong>Event Description:</strong>  {{ data.description.details.event_desc }}</p>
+      <p class="lead"><strong>Modbus Address:</strong>  {{ data.description.details.modbus_address }}</p>
+      <p class="lead"><strong>Value:</strong>  {{ data.description.details.value }}</p>
+      <p class="lead"><strong>Ack:</strong>  {{ data.description.details.ack }}</p>
+    <!--</div>-->
+
+    <!--<div>-->
+      <!--<p class="lead"><strong>Event Key:</strong>  {{ data.evKey }}</p>-->
+      <!--<p class="lead"><strong>Event Description:</strong>  {{ data.evDesc }}</p>-->
+      <!--<p class="lead"><strong>Modbus Address:</strong>  {{ data.evMDA }}</p>-->
+      <!--<p class="lead"><strong>Value:</strong>  {{ data.evVal }}</p>-->
+      <!--<p class="lead"><strong>Ack:</strong>  {{ data.evAck }}</p>-->
+    <!--</div>-->
+  </div>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions>
+  <div class="ml-auto">
+    <button type="button" class="input-group-text btn btn-outline-primary mb-1" mat-raised-button (click)="onOk()">Ok</button>
+  </div>
+</mat-dialog-actions>
+

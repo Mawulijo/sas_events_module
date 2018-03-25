@@ -1,0 +1,21 @@
+
+p{
+  color: #FFFFFF;
+}
+
+li a{
+  border: 2px solid yellowgreen;
+}
+@media (max-width: 450px) {
+ li{
+   display: inline-grid;
+   grid-template-columns: 30% 50%;
+ }
+}
+
+@media (max-width: 740px) {
+  li{
+    display: inline-grid;
+    grid-template-columns: 30% 50%;
+  }
+}

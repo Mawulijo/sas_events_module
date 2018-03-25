@@ -1,0 +1,32 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  min-width: 300px;
+  margin-top: 10px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.id{
+  width: 100px;
+}
+
+button{
+  color: black;
+  border: 2px solid yellowgreen;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  padding-right: 16px;
+}
+form{
+  background: #F8F9FA;
+}
+
+.fa{
+  color: black;
+}

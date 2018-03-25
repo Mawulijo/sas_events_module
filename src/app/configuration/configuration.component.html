@@ -1,0 +1,151 @@
+<br>
+<!--<form class="example-form">-->
+  <!--<mat-form-field class="example-full-width">-->
+    <!--<input  matInput placeholder="Email"-->
+            <!--[formControl]="emailFormControl"-->
+           <!--[errorStateMatcher]="matcher">-->
+    <!--<mat-hint>Errors appear instantly!</mat-hint>-->
+    <!--<mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">-->
+      <!--Please enter a valid email address-->
+    <!--</mat-error>-->
+    <!--<mat-error *ngIf="emailFormControl.hasError('required')">-->
+      <!--Email is <strong>required</strong>-->
+    <!--</mat-error>-->
+  <!--</mat-form-field>-->
+<!--</form>-->
+<mat-tab-group>
+
+  <!--Substations Tab-->
+  <mat-tab label="Substations">
+
+    <div class="example-container mat-elevation-z2">
+      <mat-table #table [dataSource]="dataSource">
+        <!-- Region Column -->
+          <ng-container matColumnDef="region">
+            <mat-header-cell *matHeaderCellDef><span class="lead">Region</span></mat-header-cell>
+            <mat-cell *matCellDef="let substation"> {{substation.region}} </mat-cell>
+          </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef><span class="lead">Name</span></mat-header-cell>
+          <mat-cell *matCellDef="let substation"> {{substation.subName}} </mat-cell>
+        </ng-container>
+
+        <!-- TimeStamp Column -->
+        <ng-container matColumnDef="voltage">
+          <mat-header-cell *matHeaderCellDef><span class="lead">Voltage</span></mat-header-cell>
+          <mat-cell *matCellDef="let substation"> {{substation.voltage}} </mat-cell>
+        </ng-container>
+
+        <!-- Substation Column -->
+        <ng-container matColumnDef="bay">
+          <mat-header-cell *matHeaderCellDef><span class="lead">Bay</span></mat-header-cell>
+          <mat-cell *matCellDef="let substation; let i= index;"> <span style="color: blue; cursor: pointer; text-decoration: underline;" (click)="openBayDialog(i)"> {{substation.bay.name}} </span> </mat-cell>
+        </ng-container>
+
+        <!--(click)="openBayDialog(substation.bay.relay.name,-->
+        <!--substation.bay.relay.modbusId,-->
+        <!--substation.bay.relay.type)" -->
+
+
+        <!--<ng-container matColumnDef="relayName">-->
+          <!--<mat-header-cell *matHeaderCellDef><span class="lead">Relay Name</span></mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let substation">{{substation.bay.relay.name}}</mat-cell>-->
+        <!--</ng-container>-->
+
+        <!--<ng-container matColumnDef="relayModBus">-->
+          <!--<mat-header-cell *matHeaderCellDef><span class="lead">Modbus Address</span></mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let substation"> {{substation.bay.relay.modbusId}} </mat-cell>-->
+        <!--</ng-container>-->
+
+        <!--<ng-container matColumnDef="relayType">-->
+          <!--<mat-header-cell *matHeaderCellDef><span class="lead">Relay Time</span></mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let substation"> {{substation.bay.relay.type}} </mat-cell>-->
+        <!--</ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: antiquewhite;"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+      <mat-paginator #paginator
+                     [pageSize]="5"
+                     [pageSizeOptions]="[5, 10, 20]"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+    </div>
+    <br>
+    <div class="text-right">
+    <button class="btn btn-outline-primary" mat-raised-button (click)="addSubstation()"><span class="lead">Add Substation <i class="fa fa-plus"></i></span></button>
+    </div>
+  </mat-tab>
+
+
+
+
+
+
+
+
+  <!--System configurations tab-->
+  <mat-tab label="Sys. Configuration">
+    <!--<mat-spinner></mat-spinner>-->
+
+    <div class="row">
+      <!--Devices Column-->
+      <div class="col-lg-6 right-pane">
+
+      </div>
+      <hr>
+      <!--Configuration Column-->
+      <div class="col-lg-6 left-pane">
+        <div class="form conf-form">
+            <mat-form-field>
+              <mat-select placeholder="Port" [(ngModel)]="selectedPort" name="port">
+                <mat-option *ngFor="let port of ports" [value]="port.port">
+                  {{port.viewPort}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Databits" [(ngModel)]="selectedBit" name="databits">
+                <mat-option *ngFor="let databit of databits" [value]="databit.databit">
+                  {{databit.viewDBits}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Parity" [(ngModel)]="selectedParity" name="parity">
+                <mat-option *ngFor="let parity of parities" [value]="parity.parity">
+                  {{parity.viewParity}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Baud Rate" [(ngModel)]="selectedBrate" name="baudrate">
+                <mat-option *ngFor="let baudrate of baudrates" [value]="baudrate.baudrate">
+                  {{baudrate.viewBrate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput placeholder="Read Timeout" class="rt">
+            </mat-form-field>
+
+          <div class="text-right">
+            <button class="btn btn-outline-primary" mat-raised-button><span class="lead">Submit</span></button>
+            <button class="btn btn-outline-danger" mat-raised-button><span class="lead">Cancel</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-tab>
+
+
+</mat-tab-group>
+

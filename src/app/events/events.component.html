@@ -1,0 +1,152 @@
+<br>
+
+<mat-divider></mat-divider>
+
+<form class="form-inline">
+  <div class="ml-lg-2">
+    <mat-form-field>
+      <mat-select placeholder="Region(s)" [(ngModel)]="selectedRegion" name="region" [(value)]="filter.region" multiple>
+        <mat-option>All Regions</mat-option>
+        <mat-option *ngFor="let region of regions" [value]="region.region">
+          {{region.viewRegion}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="ml-lg-2">
+    <mat-form-field>
+      <mat-select placeholder="Substation(s)" [(ngModel)]="selectedSubstn" name="substation" [(value)]="filter.substation" multiple>
+        <mat-option>All Substations</mat-option>
+        <mat-option *ngFor="let stn of substations" [value]="stn.substn">
+          {{stn.viewSubstn}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="ml-lg-2">
+    <mat-form-field>
+      <mat-select placeholder="Voltage(s)" [(ngModel)]="selectedVolt" name="voltage" [(value)]="filter.voltage" multiple>
+        <mat-option>All Voltages</mat-option>
+        <mat-option *ngFor="let vlt of voltages" [value]="vlt.volt">
+          {{vlt.viewVolt}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="ml-lg-2">
+    <mat-form-field>
+      <mat-select placeholder="Bay(s)" [(ngModel)]="selectedBay" name="bay" [(value)]="filter.bay" multiple>
+        <mat-option>All Bays</mat-option>
+        <mat-option *ngFor="let bay of bays" [value]="bay.bay">
+          {{bay.viewBay}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!--<p> Selected Region: {{selectedBay}} </p>-->
+
+    <!--<mat-radio-group>-->
+      <!--<mat-radio-button value="fault" name="fault">Fault</mat-radio-button>-->
+      <!--<mat-radio-button value="dr" name="dr">DR</mat-radio-button>-->
+    <!--</mat-radio-group>-->
+
+  <div class="ml-auto mr-3">
+    <button class="btn btn-outline-primary" mat-raised-button (click)="filterEvents()"><span class="lead">Filter</span></button>
+    <button class="btn btn-outline-primary" mat-raised-button (click)="resetFilter()"><span class="lead">Clear Filter</span></button>
+  </div>
+</form>
+
+<mat-divider></mat-divider>
+
+<!--Data Table-->
+<div class="example-container mat-elevation-z2">
+  <mat-table #table [dataSource]="dataSource">
+    <!-- ID Column -->
+    <div id="id">
+      <ng-container matColumnDef="no">
+        <mat-header-cell *matHeaderCellDef  class="id"><span class="lead">ID</span></mat-header-cell>
+        <mat-cell *matCellDef="let event"> {{event.no}} </mat-cell>
+      </ng-container>
+    </div>
+    <!-- TimeStamp Column -->
+    <ng-container matColumnDef="timestamp">
+      <mat-header-cell *matHeaderCellDef><span class="lead">Time Stamp</span></mat-header-cell>
+      <mat-cell *matCellDef="let event"> {{event.timestamp}} </mat-cell>
+    </ng-container>
+
+    <!-- Substation Column -->
+    <ng-container matColumnDef="substation">
+      <mat-header-cell *matHeaderCellDef> <span class="lead">Substation</span></mat-header-cell>
+      <mat-cell *matCellDef="let event"> {{event.substation}} </mat-cell>
+    </ng-container>
+
+    <!-- Bay Column -->
+    <ng-container matColumnDef="bay">
+      <mat-header-cell *matHeaderCellDef> <span class="lead">Bay</span></mat-header-cell>
+      <mat-cell *matCellDef="let event"> {{event.bay}} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> <span class="lead">Description</span></mat-header-cell>
+      <mat-cell *matCellDef="let event; let i=index;">
+          <span style="color: blue; cursor: pointer; text-decoration: underline;" (click)="openEventsDDialog(i)">{{event.description.name}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!--<ng-container matColumnDef="description">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Description</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event; let i=index;">-->
+          <!--<span style="color: blue; cursor: pointer; text-decoration: underline;" (click)="openEventsDDialog(event.description.details.event_key,-->
+          <!--event.description.details.event_desc, event.description.details.modbus_address,-->
+          <!--event.description.details.value, event.description.details.ack)">-->
+
+            <!--{{event.description.name}}-->
+
+          <!--</span>-->
+      <!--</mat-cell>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="evK">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Event Key</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event"> {{event.description.details.event_key}} </mat-cell>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="evD">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Event Desc</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event"> {{event.description.details.event_desc}} </mat-cell>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="mdbus">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Modbus Address</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event"> {{event.description.details.modbus_address}} </mat-cell>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="val">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Event Value</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event"> {{event.description.details.value}} </mat-cell>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="ack">-->
+      <!--<mat-header-cell *matHeaderCellDef> <span class="lead">Event Value</span></mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let event"> {{event.description.details.ack}} </mat-cell>-->
+    <!--</ng-container>-->
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: antiquewhite;"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"> <i class="fa fa-info" *ngIf="row.description == ''"></i> </mat-row>
+
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+
+</div>
+
+

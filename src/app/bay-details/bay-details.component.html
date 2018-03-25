@@ -1,0 +1,24 @@
+<div class="text-center" mat-dialog-title><h1 class="lead"><strong>{{data.length}} relay(s) in bay</strong></h1></div>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+
+  <div class="text-justify" *ngFor="let relay of data;">
+    <!--<div *ngIf="data.length!==0; else infoText">-->
+      <p class="lead"><strong>Relay Name:</strong> {{ relay.name }}</p>
+      <p class="lead"><strong>Relay Type:</strong> {{ relay.type }}</p>
+      <p class="lead"><strong>Modbus ID:</strong> {{ relay.modbusId }}</p>
+    <!--</div>-->
+    <mat-divider></mat-divider>
+
+    <!--<ng-template #infoText>-->
+      <!--<p class="lead">No relays in this bay!</p>-->
+    <!--</ng-template>-->
+  </div>
+</mat-dialog-content>
+<!--<mat-divider></mat-divider>-->
+<mat-dialog-actions>
+  <div class="ml-auto">
+    <button type="button" class="input-group-text btn btn-outline-primary mb-1" mat-raised-button (click)="onOk()">Ok</button>
+  </div>
+</mat-dialog-actions>
+

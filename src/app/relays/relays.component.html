@@ -1,0 +1,37 @@
+<div class="text-center" mat-dialog-title><h1 class="lead"><strong>Add Relays</strong></h1></div>
+<mat-divider></mat-divider>
+<mat-dialog-content>
+  <form class="text-center" [formGroup]="subComponent.substnConfigForm" >
+    <div formArrayName="bay.relays">
+      <div *ngFor="let relay of subComponent.substnConfigForm.get('bay.relays'); let i=index;">
+        <mat-form-field>
+          <input placeholder="Relay Name"  type="text" matInput [formControlName]="i">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="ModBus ID" [(ngModel)]="modbusIds" [formControlName]="i">
+            <mat-option *ngFor="let modbusId of modbusIds" [value]="modbusId">
+              {{modbusId}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Relay Type" [(ngModel)]="relaytype" [formControlName]="i">
+            <mat-option *ngFor="let relaytype of relaytypes" [value]="relaytype">
+              {{relaytype}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions>
+  <div class="ml-auto">
+    <button type="button" class="input-group-text btn-sm btn-outline-primary mb-1" mat-raised-button (click)="onCloseSubmit()">Submit</button>
+    <button type="button" class="input-group-text btn-sm btn-outline-danger mb-1" mat-raised-button (click)="onCloseCancel()">Cancel</button>
+  </div>
+</mat-dialog-actions>
+
+

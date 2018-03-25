@@ -1,0 +1,79 @@
+<div class="text-center" mat-dialog-title><h1 class="lead"><strong>Add Substation</strong></h1></div>
+<mat-divider></mat-divider>
+    <mat-dialog-content>
+      <form class="text-center" [formGroup]="substnConfigForm" (ngSubmit)="onCloseSubmit(substnConfigForm.value)">
+
+        <mat-form-field>
+          <mat-select placeholder="Select Region" name="region" formControlName="region">
+            <mat-option *ngFor="let region of regions" [value]="region">
+              {{region}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Select Substation"  formControlName="subName">
+            <mat-option *ngFor="let substation of substations" [value]="substation">
+              {{substation}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+
+        <!--<mat-radio-group *ngFor="let voltage of voltages" [value]="voltage">-->
+        <!--<mat-radio-button name="voltage" (click)="onVoltSelect()">{{ voltage }}</mat-radio-button>-->
+        <!--</mat-radio-group>-->
+
+        <p><ng-template #selectVoltage><span class="lead">Select Voltage</span></ng-template></p>
+        <div class="d-inline-block ml-0 mr-3" *ngFor="let voltage of voltages">
+             <input type="radio" class="radio" name="voltage" id="voltage"  (click)="onVoltSelect()"  [value]="voltage" formControlName="voltage" [(ngModel)]="voltageSelected">
+             <label for="voltage"> {{ voltage }} </label>
+        </div>
+        <span class="lead" *ngIf="selectedVolt; else selectVoltage">Selected Voltage: <strong>{{voltageSelected}}</strong></span>
+          <!--<button type="button" class="btn btn-sm btn-outline-warning" mat-raised-button [ngStyle]="{'background-color':'antiquewhite'}" [ngClass]="{voltColor:selectedVolt === true}" *ngIf="selectedVolt; else selectVoltage">Selected Voltage: {{voltageSelected}}</button>-->
+        <br>
+        <br>
+
+        <div formGroupName="bay">
+          <mat-form-field class="mr-5-0">
+            <input matInput placeholder="Bay Name" type="text" formControlName="name">
+          </mat-form-field>
+          <span class="ml-5">&nbsp;&nbsp;</span>
+          <button type="button" class="input-group-text btn btn-outline-primary mb-2" mat-raised-button (click)="addRelay()">Add Relay(s)  <i class="fa fa-plus"></i></button>
+
+          <div formArrayName="relays">
+            <div class="d-inline-block mr-auto mr-0"  *ngFor="let relay of getControls(this.substnConfigForm); let i=index;">
+                  <mat-form-field style="width: 120px;">
+                      <input placeholder="Relay Name"  type="text" matInput [formControlName]="i">
+                  </mat-form-field>
+
+                  <mat-form-field style="width: 100px;">
+                      <mat-select placeholder="ModBus ID" [formControlName]="">
+                        <mat-option *ngFor="let modbusId of modbusIds" [value]="modbusId">
+                          {{modbusId}}
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field style="width: 100px;">
+                      <mat-select placeholder="Relay Type" [formControlName]="">
+                        <mat-option *ngFor="let relaytype of relaytypes" [value]="relaytype">
+                          {{relaytype}}
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                <span>&nbsp;<i class="fa fa-close" (click)="onClose()"></i></span>
+              <!--</div>-->
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions>
+      <div class="ml-auto">
+        <button type="button" class="input-group-text btn btn-outline-primary mb-1" mat-raised-button (click)="onCloseSubmit()" [disabled]="!substnConfigForm.valid">Submit</button>
+        <button type="button" class="input-group-text btn btn-outline-danger mb-1" mat-raised-button (click)="onCloseCancel()">Cancel</button>
+      </div>
+    </mat-dialog-actions>

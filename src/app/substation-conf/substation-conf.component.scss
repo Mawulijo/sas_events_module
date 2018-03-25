@@ -1,0 +1,17 @@
+button, .btn-sm{
+  border: 2px solid yellowgreen;
+  color: black;
+}
+
+.voltColor{
+  color: red;
+}
+
+input[type="radio"]:after{
+  display: block;
+  border: 2px solid yellowgreen;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  content: '';
+}

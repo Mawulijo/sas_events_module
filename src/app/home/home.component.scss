@@ -1,0 +1,42 @@
+p{
+  color: #FFFFFF;
+}
+
+.intro-2 {
+  background: url("../../assets/substn.jpg")no-repeat center center;
+  background-size: cover;
+  margin-top: 0;
+  height: 500px;
+  width: 100%;
+}
+
+h1.lead{
+  font-size: 40px;
+}
+a span.lead{
+  color: black;
+}
+h6 {
+  line-height: 1.7;
+}
+.hm-gradient .full-bg-img {
+  background: linear-gradient(45deg, rgba(42, 27, 161, 0.6), rgba(29, 210, 177, 0.6) 100%);
+  height: 500px;
+}
+@media (max-width: 450px) {
+  .margins {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 740px) {
+  .full-height,
+  .full-height body,
+  .full-height header,
+  .full-height header {
+    height: 1020px;
+  }
+}
+
