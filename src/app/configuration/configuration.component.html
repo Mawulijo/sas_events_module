@@ -41,7 +41,7 @@
         <!-- Substation Column -->
         <ng-container matColumnDef="bay">
           <mat-header-cell *matHeaderCellDef><span class="lead">Bay</span></mat-header-cell>
-          <mat-cell *matCellDef="let substation; let i= index;"> <span style="color: blue; cursor: pointer; text-decoration: underline;" (click)="openBayDialog(i)"> {{substation.bay.name}} </span> </mat-cell>
+          <mat-cell *matCellDef="let substation; let i= index;"> <span style="color: blue; cursor: pointer; text-decoration: underline;" (click)="openBayDialog(i)"> {{substation.bay.bayName}} </span> </mat-cell>
         </ng-container>
 
         <!--(click)="openBayDialog(substation.bay.relay.name,-->

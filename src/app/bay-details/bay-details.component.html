@@ -4,9 +4,9 @@
 
   <div class="text-justify" *ngFor="let relay of data;">
     <!--<div *ngIf="data.length!==0; else infoText">-->
-      <p class="lead"><strong>Relay Name:</strong> {{ relay.name }}</p>
-      <p class="lead"><strong>Relay Type:</strong> {{ relay.type }}</p>
+      <p class="lead"><strong>Relay Name:</strong> {{ relay.relayName }}</p>
       <p class="lead"><strong>Modbus ID:</strong> {{ relay.modbusId }}</p>
+      <p class="lead"><strong>Relay Type:</strong> {{ relay.relayType }}</p>
     <!--</div>-->
     <mat-divider></mat-divider>
 
