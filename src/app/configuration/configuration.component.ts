@@ -18,7 +18,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 })
 
 export class ConfigurationComponent implements OnInit {
-  dialogResult = '';
+  dialogResult = {};
 
   constructor(public dialog: MatDialog, public substationService: SubstationService) {
     console.log(this.substationService.substations[0])

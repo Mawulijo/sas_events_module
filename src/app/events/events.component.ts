@@ -91,7 +91,6 @@ export class EventsComponent implements OnInit {
       width: '500px',
       data: this.eventsService.events[i] //object passed to modal
     });
-    // console.log(this.eventsService.events[i])
 
     eventDDialogRef.afterClosed().subscribe(result => {
       this.dialogR = result;

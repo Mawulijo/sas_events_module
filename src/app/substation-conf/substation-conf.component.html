@@ -12,7 +12,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Select Substation"  formControlName="subName">
+          <mat-select placeholder="Select Substation" name="station" formControlName="subName">
             <mat-option *ngFor="let substation of substations" [value]="substation">
               {{substation}}
             </mat-option>
@@ -26,7 +26,7 @@
 
         <p><ng-template #selectVoltage><span class="lead">Select Voltage</span></ng-template></p>
         <div class="d-inline-block ml-0 mr-3" *ngFor="let voltage of voltages; let i = index">
-             <input type="radio" class="radio" name="voltage" id="voltage"  (click)="onVoltSelect()"  [value]="voltage" formControlName="voltage" [(ngModel)]="voltageSelected">
+             <input type="radio" class="radio" name="voltage" id="voltage"  (click)="onVoltSelect()"  [value]="voltage" formControlName="voltage">
              <label [attr.for]="'voltage'+i"> {{ voltage }} </label>
         </div>
         <span class="lead" *ngIf="selectedVolt; else selectVoltage">Selected Voltage: <strong>{{voltageSelected}}</strong></span>
@@ -36,21 +36,19 @@
 
         <div formGroupName="bay">
             <mat-form-field class="mr-5-0">
-                <input matInput placeholder="Bay Name" type="text" formControlName="bayName">
+                <input matInput placeholder="Bay Name" type="text" name="bname" formControlName="bayName">
             </mat-form-field>
               <span class="ml-5">&nbsp;&nbsp;</span>
             <button type="button" class="input-group-text btn btn-outline-primary mb-2" mat-raised-button (click)="addRelay()">Add Relay(s)  <i class="fa fa-plus"></i></button>
 
           <div formArrayName="relays">
-            <div class="d-inline-block mr-auto mr-0"  *ngFor="let relay of this.substnConfigForm.get('bay.relays').controls; let i=index;">
-            <!--<div class="d-inline-block mr-auto mr-0"  *ngFor="let relay of getControls(this.substnConfigForm); let i=index;">-->
-              <div [hidden]="showRelayForm" [formGroup]="relay">
+            <div class="d-inline-block mr-auto mr-0"  *ngFor="let relay of getControls(this.substnConfigForm); let i=index;">
+              <div [formGroup]="relay">
                 <mat-form-field style="width: 120px;">
                   <input placeholder="Relay Name" name="relayName" type="text" matInput formControlName="relayName">
                 </mat-form-field>
 
                 <mat-form-field style="width: 100px;">
-                  <!--<mat-select placeholder="ModBus ID">-->
                   <mat-select placeholder="ModBus ID" formControlName="modbusId">
                     <mat-option *ngFor="let modbusId of modbusIds" name="modbusId" [value]="modbusId">
                       {{modbusId}}
@@ -59,7 +57,6 @@
                 </mat-form-field>
 
                 <mat-form-field style="width: 100px;">
-                  <!--<mat-select placeholder="Relay Type">-->
                   <mat-select placeholder="Relay Type" formControlName="relayType">
                     <mat-option *ngFor="let relaytype of relaytypes" name="relayType" [value]="relaytype">
                       {{relaytype}}
@@ -67,7 +64,6 @@
                   </mat-select>
                 </mat-form-field>
                 <span style="color: #ff543c; cursor: pointer;">&nbsp;&nbsp;<i class="fa fa-close" (click)="deleteRelay(i)"></i></span>
-                <!--<span>&nbsp;<i class="fa fa-close" (click)="this.relay.get('relays').splice(i)"></i></span>-->
               </div>
             </div>
           </div>
